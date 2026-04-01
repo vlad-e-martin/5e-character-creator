@@ -1,7 +1,7 @@
 # Setup and build outputs
-go.mod
 web/main.wasm
 *.exe
 
 # VS Code config files
 .vscode/*
+.idea
