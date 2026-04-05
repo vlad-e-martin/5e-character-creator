@@ -15,7 +15,7 @@ const POINT_BUY_COSTS = {
  * Retrieves the point cost for a given ability score.
  * Extrapolates costs for homebrew scores outside the standard 8-15 bounds.
  */
-function calculatePointCost(score) {
+export function calculatePointCost(score) {
     if (score < 8) {
         // Refund 1 point per level below 8
         return score - 8; 

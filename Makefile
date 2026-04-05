@@ -42,17 +42,17 @@ OUTPUT := $(BINARY)$(BINARY_EXT)
 
 .PHONY: build
 build:  ## Compile the Go binary
-    $(GO) build -o $(OUTPUT) .
-    @echo "Built: $(OUTPUT)"
+	$(GO) build -o $(OUTPUT) .
+	@echo "Built: $(OUTPUT)"
 
 .PHONY: build-llm
 build-llm:  ## Compile (LLM output)
-    $(GO) build -o $(OUTPUT) . 2>&1
+	$(GO) build -o $(OUTPUT) . 2>&1
 
 .PHONY: clean
 clean:  ## Remove compiled binary
-    @$(RM_CMD)
-    @echo "Cleaned."
+	@$(RM_CMD)
+	@echo "Cleaned."
 
 # =============================================================================
 # RUN
@@ -60,12 +60,12 @@ clean:  ## Remove compiled binary
 
 .PHONY: run
 run: build  ## Build and start the server on :8080
-    @echo "Starting server at http://localhost:$(PORT)"
-    $(EXEC_CMD)
+	@echo "Starting server at http://localhost:$(PORT)"
+	$(EXEC_CMD)
 
 .PHONY: run-dev
 run-dev:  ## Run directly with go run (no compile step, faster iteration)
-    $(GO) run main.go
+	$(GO) run main.go
 
 # =============================================================================
 # QUALITY GATES
@@ -73,40 +73,51 @@ run-dev:  ## Run directly with go run (no compile step, faster iteration)
 
 .PHONY: vet
 vet:  ## Run go vet
-    @echo "--- go vet ---"
-    $(GO) vet ./...
+	@echo "--- go vet ---"
+	$(GO) vet ./...
 
 .PHONY: vet-llm
 vet-llm:  ## go vet (LLM output)
-    $(GO) vet ./... 2>&1
+	$(GO) vet ./... 2>&1
 
 .PHONY: fmt
 fmt:  ## Check formatting with gofmt (does not modify files)
-    @echo "--- gofmt check ---"
-    @$(FMT_CMD)
+	@echo "--- gofmt check ---"
+	@$(FMT_CMD)
 
 .PHONY: fmt-llm
 fmt-llm:  ## gofmt check (LLM output)
-    @gofmt -l . 2>&1
+	@gofmt -l . 2>&1
 
 .PHONY: fmt-fix
 fmt-fix:  ## Auto-fix formatting with gofmt
-    gofmt -w .
-    @echo "Formatted all Go files."
+	gofmt -w .
+	@echo "Formatted all Go files."
+
+.PHONY: test-go
+test-go:  ## Run only Go backend tests
+	@echo "--- running go tests ---"
+	$(GO) test -v ./...
+
+.PHONY: test-js
+test-js:  ## Run only JS frontend tests (Vitest)
+	@echo "--- running js tests ---"
+	npm test
 
 .PHONY: test
-test:  ## Run all Go tests
-    @echo "--- go test ---"
-    $(GO) test -v ./...
+test: test-go test-js ## Run all tests (Go + JS)
+
+.PHONY: test-go-llm
+test-llm:  ## Run tests (LLM output — no colour, concise)
+	$(GO) test ./...
 
 .PHONY: test-llm
-test-llm:  ## Run tests (LLM output — no colour, concise)
-    $(GO) test ./...
+test: test-go-llm test-js ## Run all tests (Go + JS)
 
 .PHONY: check
-check: vet fmt test  ## Run all quality gates (vet + fmt check + tests)
-    @echo ""
-    @echo "All checks passed."
+check: vet fmt test  ## Run all quality gates (vet + fmt check + Go & JS tests)
+	@echo ""
+	@echo "All checks passed."
 
 .PHONY: check-llm
 check-llm: vet-llm fmt-llm test-llm  ## All quality gates, LLM-friendly output
@@ -120,28 +131,28 @@ DEV_CONTAINER := char-dev-container
 
 .PHONY: docker-dev-build
 docker-dev-build:  ## Build the dev Docker image
-    docker build -t $(DEV_IMAGE) -f Dockerfile.dev .
+	docker build -t $(DEV_IMAGE) -f Dockerfile.dev .
 
 .PHONY: docker-dev-start
 docker-dev-start:  ## Start the dev container with volume mount
-    docker run -d \
-      --name $(DEV_CONTAINER) \
-      -p $(PORT):$(PORT) \
-      --mount type=bind,source="$(CURDIR)",target=/app \
-      $(DEV_IMAGE)
-    @echo "Dev container started. Connect with: make docker-dev-shell"
+	docker run -d \
+	  --name $(DEV_CONTAINER) \
+	  -p $(PORT):$(PORT) \
+	  --mount type=bind,source="$(CURDIR)",target=/app \
+	  $(DEV_IMAGE)
+	@echo "Dev container started. Connect with: make docker-dev-shell"
 
 .PHONY: docker-dev-shell
 docker-dev-shell:  ## Attach a shell to the running dev container
-    docker exec -it $(DEV_CONTAINER) bash
+	docker exec -it $(DEV_CONTAINER) bash
 
 .PHONY: docker-dev-stop
 docker-dev-stop:  ## Stop and remove the dev container
-    docker stop $(DEV_CONTAINER) && docker rm $(DEV_CONTAINER)
+	docker stop $(DEV_CONTAINER) && docker rm $(DEV_CONTAINER)
 
 .PHONY: docker-dev-logs
 docker-dev-logs:  ## Tail logs from the dev container
-    docker logs -f $(DEV_CONTAINER)
+	docker logs -f $(DEV_CONTAINER)
 
 # =============================================================================
 # DOCKER — PRODUCTION
@@ -151,31 +162,36 @@ PROD_IMAGE := char-creator-prod
 
 .PHONY: docker-prod-build
 docker-prod-build:  ## Build the production Docker image
-    docker build -t $(PROD_IMAGE) -f Dockerfile.deploy .
+	docker build -t $(PROD_IMAGE) -f Dockerfile.deploy .
 
 .PHONY: docker-prod-run
 docker-prod-run:  ## Run the production image
-    docker run --rm -p $(PORT):$(PORT) $(PROD_IMAGE)
+	docker run --rm -p $(PORT):$(PORT) $(PROD_IMAGE)
 
 # =============================================================================
 # CONVENIENCE
 # =============================================================================
 
+.PHONY: install
+install: ## Install both Go and JS dependencies
+	$(GO) mod download
+	npm install
+
 .PHONY: tidy
 tidy:  ## Run go mod tidy to sync dependencies
-    $(GO) mod tidy
+	$(GO) mod tidy
 
 .PHONY: deps
 deps:  ## Download all Go dependencies
-    $(GO) mod download
+	$(GO) mod download
 
 .PHONY: init
 init:  ## Initialize go.mod if it doesn't exist (needed on fresh clone)
-    @$(INIT_CMD)
+	@$(INIT_CMD)
 
 .PHONY: open
 open:  ## Open the app in the default browser
-    @$(OPEN_CMD)
+	@$(OPEN_CMD)
 
 # =============================================================================
 # HELP
@@ -183,6 +199,6 @@ open:  ## Open the app in the default browser
 
 .PHONY: help
 help:  ## Show this help
-    @$(HELP_CMD)
+	@$(HELP_CMD)
 
 .DEFAULT_GOAL := help

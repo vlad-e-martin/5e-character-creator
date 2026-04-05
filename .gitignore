@@ -2,6 +2,14 @@
 web/main.wasm
 *.exe
 
+# Node dependencies
+node_modules/
+# Keep package-lock.json for consistent builds
+
 # VS Code config files
 .vscode/*
 .idea
+
+# Vitest / Test Outputs
+coverage/
+*.log

@@ -1,0 +1,24 @@
+{
+  "name": "5e-character-creator",
+  "version": "1.0.0",
+  "description": "This project is an educational project I came up with to teach myself Go (and improve my JS proficiency). I chose to build a web-based character creator for tabletop roleplaying games, primarily focused on D&D 5th Edition.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlad-e-martin/5e-character-creator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vlad-e-martin/5e-character-creator/issues"
+  },
+  "homepage": "https://github.com/vlad-e-martin/5e-character-creator#readme",
+  "devDependencies": {
+    "jsdom": "^29.0.1",
+    "vitest": "^4.1.2"
+  }
+}
