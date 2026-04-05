@@ -1,13 +1,25 @@
 <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl font-bold text-stone-800 mb-6">Step 2: Ability Scores</h2>
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
+        <h2 class="text-2xl font-bold text-stone-800">Step 2: Ability Scores</h2>
+        
+        <div id="point-buy-container" class="bg-stone-100 border border-stone-300 px-4 py-2 rounded-lg text-stone-700 shadow-sm transition-colors duration-300">
+            <span class="text-sm font-semibold uppercase tracking-wider mr-2">Point Buy:</span>
+            <span id="point-buy-display" class="text-xl font-bold">0 / 27</span>
+        </div>
+    </div>
+    
     <div class="bg-white p-6 rounded-lg shadow-md">
         <p class="text-stone-700 mb-6">
-            Enter your base ability scores. Racial bonuses from your selections on Step 1 are locked in, but you can add any additional miscellaneous modifiers below.
+            Enter your base ability scores and any miscellaneous modifiers. Racial bonuses from Step 1 are locked in. The standard point buy system allows 27 points, with base scores ranging from 8 to 15.
         </p>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-str">0</span>
+                </div>
+                
                 <span class="font-bold text-stone-700 mb-3">Strength (STR)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">
@@ -32,7 +44,10 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-dex">0</span>
+                </div>
                 <span class="font-bold text-stone-700 mb-3">Dexterity (DEX)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">
@@ -57,7 +72,10 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-con">0</span>
+                </div>
                 <span class="font-bold text-stone-700 mb-3">Constitution (CON)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">
@@ -82,7 +100,10 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-int">0</span>
+                </div>
                 <span class="font-bold text-stone-700 mb-3">Intelligence (INT)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">
@@ -107,7 +128,10 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-wis">0</span>
+                </div>
                 <span class="font-bold text-stone-700 mb-3">Wisdom (WIS)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">
@@ -132,7 +156,10 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+            <div class="relative p-4 bg-stone-50 border border-stone-200 rounded-md flex flex-col items-center shadow-sm">
+                <div class="absolute top-3 right-3 text-xs font-semibold text-stone-500 bg-stone-200 px-2 py-0.5 rounded-md border border-stone-300 transition-colors">
+                    Cost: <span id="cost-cha">0</span>
+                </div>
                 <span class="font-bold text-stone-700 mb-3">Charisma (CHA)</span>
                 <div class="flex items-end space-x-2 w-full justify-center text-sm pb-1">
                     <div class="flex flex-col items-center">

@@ -5,6 +5,37 @@
 
 const STATS = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
+// Standard Point Buy Costs table
+// See official table: https://www.dndbeyond.com/sources/dnd/basic-rules-2014/step-by-step-characters#AbilityScorePointCost
+const POINT_BUY_COSTS = {
+    8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9
+};
+
+/**
+ * Retrieves the point cost for a given ability score.
+ * Extrapolates costs for homebrew scores outside the standard 8-15 bounds.
+ */
+function calculatePointCost(score) {
+    if (score < 8) {
+        // Refund 1 point per level below 8
+        return score - 8; 
+    }
+    if (score > 15) {
+        // Homebrew scaling: progressively more expensive above 15
+        let cost = 9;
+        let current = 15;
+        while (current < score) {
+            current++;
+            if (current <= 17) cost += 3;
+            else if (current <= 19) cost += 4;
+            else cost += 5;
+        }
+        return cost;
+    }
+    // Return standard table cost
+    return POINT_BUY_COSTS[score];
+}
+
 /**
  * Calculates combined ability bonuses from the character's race and subrace details.
  * @param {object} character - The DndCharacter instance
@@ -39,7 +70,61 @@ function calculateRacialBonuses(character) {
 export function bindAbilitiesPage(character) {
     // 1. Calculate the innate bonuses provided by Race/SubRace selections from Page 1
     const racialBonuses = calculateRacialBonuses(character);
+    const pointBuyContainer = document.getElementById('point-buy-container');
+    const pointBuyDisplay = document.getElementById('point-buy-display');
 
+    // A function to sum up and display the global point buy tracker
+    const refreshPointBuyTracker = () => {
+        let totalPointsUsed = 0;
+        let isHomebrew = false;
+
+        STATS.forEach(stat => {
+            // Point buy is based strictly on Base + Misc (ignoring Racial)
+            const preRacialScore = (character.baseAbilityScores[stat] || 0) + (character.userAbilityBonuses[stat] || 0);
+            
+            // 1. Calculate the cost for this specific stat
+            const individualCost = calculatePointCost(preRacialScore);
+            totalPointsUsed += individualCost;
+
+            // 2. Update the individual badge UI on the stat card
+            const costDisplay = document.getElementById(`cost-${stat}`);
+            if (costDisplay) {
+                costDisplay.textContent = individualCost;
+                
+                // Color the individual badge red if it exceeds standard bounds
+                const badgeContainer = costDisplay.parentElement;
+                if (preRacialScore < 8 || preRacialScore > 15) {
+                    badgeContainer.classList.remove('bg-stone-200', 'text-stone-500', 'border-stone-300');
+                    badgeContainer.classList.add('bg-red-100', 'text-red-700', 'border-red-400');
+                } else {
+                    badgeContainer.classList.remove('bg-red-100', 'text-red-700', 'border-red-400');
+                    badgeContainer.classList.add('bg-stone-200', 'text-stone-500', 'border-stone-300');
+                }
+            }
+
+            // 3. Flag global homebrew rule breaker
+            if (preRacialScore < 8 || preRacialScore > 15) {
+                isHomebrew = true;
+            }
+        });
+
+        // Update the global total
+        if (pointBuyDisplay) {
+            pointBuyDisplay.textContent = `${totalPointsUsed} / 27`;
+        }
+
+        // Highlight global badge in red if exceeding 27 points OR using out-of-bounds numbers
+        if (pointBuyContainer) {
+            if (totalPointsUsed > 27 || isHomebrew) {
+                pointBuyContainer.classList.remove('bg-stone-100', 'border-stone-300', 'text-stone-700');
+                pointBuyContainer.classList.add('bg-red-100', 'border-red-400', 'text-red-700');
+            } else {
+                pointBuyContainer.classList.remove('bg-red-100', 'border-red-400', 'text-red-700');
+                pointBuyContainer.classList.add('bg-stone-100', 'border-stone-300', 'text-stone-700');
+            }
+        }
+    };
+    
     // 2. We iterate over each stat to set up event listeners and default values
     STATS.forEach(stat => {
         const baseInput = document.getElementById(`base-${stat}`);
@@ -72,6 +157,9 @@ export function bindAbilitiesPage(character) {
 
             // Save the total 
             character._abilityScores[stat] = finalTotal;
+
+            // Refresh global points whenever a single input changes
+            refreshPointBuyTracker();
                 
             // Allow other parts of the app to react to the ability score changing
             character.dispatchChangeEvent(`ability_${stat}`, finalTotal);
@@ -84,4 +172,7 @@ export function bindAbilitiesPage(character) {
         // Run the calculation once on load to establish baseline Totals
         updateTotal();
     });
+
+    // Run the initial point buy math on page load
+    refreshPointBuyTracker();
 }

@@ -25,6 +25,7 @@ const contentContainer = document.getElementById('content-container');
 const btnPrev = document.getElementById('btn-prev');
 const btnNext = document.getElementById('btn-next');
 const btnRestart = document.getElementById('btn-restart');
+const btnSave = document.getElementById('btn-save');
 
 // Header summary elements
 const summaryPlayer = document.getElementById('summary-player');
@@ -110,9 +111,11 @@ function updateNavButtons() {
     if (currentPageIndex === 0) {
         btnPrev.disabled = true;
         btnRestart.disabled = true;
+        btnSave.disabled = true;
         btnNext.disabled = true;
     } else {
         btnRestart.disabled = false; // Enable restart
+        btnSave.disabled = false; // Enable save
         btnPrev.disabled = (currentPageIndex === 1); // Disable on first page
         btnNext.disabled = (currentPageIndex === pages.length - 1); // Disable on last page
     }
@@ -159,7 +162,42 @@ function bindLandingButtons() {
     }
     if (btnLoad) {
         btnLoad.addEventListener('click', () => {
-            alert("Load Character functionality is not yet implemented.");
+            // Create a hidden file input element
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.json'; // Only accept JSON files
+
+            // Listen for when the user selects a file
+            fileInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const parsedData = JSON.parse(event.target.result);
+                        
+                        // Instantiate a fresh character and merge the loaded data into it
+                        character = new DndCharacter();
+                        Object.assign(character, parsedData);
+                        
+                        character.addEventListener('change', updateSummaryBanner);
+                        updateSummaryBanner(); 
+                        
+                        // Jump right into Step 1 with the loaded data
+                        loadPage(1); 
+                    } catch (err) {
+                        alert("Failed to load character file. Ensure it is a valid JSON file.");
+                        console.error(err);
+                    }
+                };
+                
+                // Read the file as text
+                reader.readAsText(file);
+            };
+            
+            // Trigger the hidden file browser dialog
+            fileInput.click();
         });
     }
 }
@@ -183,6 +221,42 @@ btnRestart.addEventListener('click', () => {
         loadPage(0); // Go back to landing page
     }
 });
+
+btnSave.addEventListener('click', () => {
+    if (!character) return;
+
+    // Convert the character object to a formatted JSON string
+    const jsonString = JSON.stringify(character, null, 2);
+    
+    // Create a Blob containing the JSON
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a safe filename using the character's name (or a default)
+    let safeName = (character.charName || "Unnamed_Character").replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+    // Generate a timestamp like "20260405_152200"
+    const now = new Date();
+    // toISOString() looks like "2026-04-05T15:22:00.000Z". We split at the period, then remove hyphens, colons, and the 'T'.
+    const timestamp = now.toISOString().split('.')[0].replace(/[-:]/g, '').replace('T', '_');
+    
+    const fileName = `${safeName}_${timestamp}.json`;
+    
+    // Create a temporary anchor link to trigger the download
+    const downloadAnchorNode = document.createElement('a');
+    // Create an invisible web link to the Blob URL
+    downloadAnchorNode.setAttribute("href", url);
+    // Tell the browser to trigger a file download when the URL is clicked
+    downloadAnchorNode.setAttribute("download", fileName);
+    document.body.appendChild(downloadAnchorNode); // Required for Firefox
+    // Programmatically click on the Blob URL to trigger a file download
+    downloadAnchorNode.click();
+    // Remove the download web link now that the file has been downloaded
+    downloadAnchorNode.remove();
+    
+    // Clean up the URL object
+    URL.revokeObjectURL(url);
+})
 
 // --- INITIALIZATION ---
 
