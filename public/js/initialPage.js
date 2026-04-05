@@ -1,9 +1,10 @@
-import { getAllRaces, getAllClasses } from './dndApi.js';
-import { DndRace, DndClass } from './dndModels.js';
+import { getAllRaces, getAllClasses, getAllBackgrounds } from './dndApi.js';
+import { DndRace, DndClass, DndBackground } from './dndModels.js';
 
-// These hold persistent instances of DndRace and DndClass
+// These hold persistent instances of Dnd* objects
 export let allRaceDetails = [];
 export let allClassDetails = [];
+export let allBackgroundDetails = [];
 
 /**
  * Helper to select a dropdown option by its visible text content.
@@ -31,6 +32,7 @@ export function bindInitialPageInputs(character) {
     const raceSelect = document.getElementById('race-select');
     const classSelect = document.getElementById('class-select');
     const subRaceSelect = document.getElementById('subrace-select');
+    const backgroundSelect = document.getElementById('background-select');
 
     // Add event listeners
     // 'input' fires immediately. 'change' fires when unfocused.
@@ -56,9 +58,6 @@ export function bindInitialPageInputs(character) {
 
         // Fetch and apply the new full race object
         await character.applyRace(selectedValue);
-        
-        // Find the details of the selected race
-        const raceDetails = allRaceDetails.find(details => details.index === selectedValue);
         
         // Populate the sub-race dropdown using the newly fetched character.raceDetails
         if (character.raceDetails) {
@@ -91,6 +90,13 @@ export function bindInitialPageInputs(character) {
         await character.applySubRace(selectedValue);
     });
 
+    backgroundSelect.addEventListener('change', async (event) => {
+        const selectedValue = event.target.value; 
+
+        // Fetch and apply the full background object
+        await character.applyBackground(selectedValue);
+    });
+
     // --- Also, populate inputs from character object ---
     // This ensures if we go "Prev" and "Next", the values are repopulated.
     playerNameInput.value = character.playerName || "";
@@ -101,6 +107,7 @@ export function bindInitialPageInputs(character) {
     // character.level is a number, but dropdown text is a string. 
     // This ensures "1" === "1" and correctly re-selects their level.
     selectDropdownByText(levelSelect, String(character.level));
+    selectDropdownByText(backgroundSelect, character.dndBackground);
 
     // Rebuild the sub-race dropdown using the stored character state
     if (character.raceDetails) {
@@ -157,32 +164,36 @@ export async function populateInitialDropdowns() {
     const raceSelect = document.getElementById('race-select');
     const subRaceSelect = document.getElementById('subrace-select');
     const classSelect = document.getElementById('class-select');
+    const backgroundSelect = document.getElementById('background-select');
 
     // Set all to loading
     if (raceSelect) raceSelect.innerHTML = '<option>Loading races...</option>';
-    if (classSelect) classSelect.innerHTML = '<option>Loading classes...</option>';
     if (subRaceSelect) subRaceSelect.innerHTML = '<option>N/A</option>';
+    if (classSelect) classSelect.innerHTML = '<option>Loading classes...</option>';
+    if (backgroundSelect) backgroundSelect.innerHTML = '<option>Loading backgrounds...</option>';
     
     try {
         // Fetch raw JSON data in parallel
-        const [rawAllRaceDetails, rawAllClassDetails] = await Promise.all([
+        const [rawRaceDetails, rawClassDetails, rawBackgroundDetails] = await Promise.all([
             getAllRaces(),
-            getAllClasses()
+            getAllClasses(),
+            getAllBackgrounds()
         ]);
 
         // Map the raw JSON to JS Classes
-        allRaceDetails = rawAllRaceDetails.map(raceData => new DndRace(raceData));
-        allClassDetails = rawAllClassDetails.map(classData => new DndClass(classData));
+        allRaceDetails = rawRaceDetails.map(raceData => new DndRace(raceData));
+        allClassDetails = rawClassDetails.map(classData => new DndClass(classData));
+        allBackgroundDetails = rawBackgroundDetails.map(backgroundData => new DndBackground(backgroundData));
 
-        // Populate Races
-        populateDropdown(raceSelect, allRaceDetails, "Select a race");
-
-        // Populate Classes
+        // Populate dropdowns
+        populateDropdown(raceSelect, allRaceDetails, "Select a race");        
         populateDropdown(classSelect, allClassDetails, "Select a class");
+        populateDropdown(backgroundSelect, allBackgroundDetails, "Select a background");
 
     } catch (error) {
         console.error("Failed to populate dropdowns:", error);
         if (raceSelect) raceSelect.innerHTML = '<option>Error loading races</option>';
         if (classSelect) classSelect.innerHTML = '<option>Error loading classes</option>';
+        if (backgroundSelect) backgroundSelect.innerHTML = '<option>Error loading backgrounds</option>';
     }
 }

@@ -106,6 +106,12 @@ func main() {
 		dndapi.GetSkill,
 	))
 
+	mux.HandleFunc("/api/backgrounds/", createResourceHandler(
+		"/api/backgrounds/",
+		dndapi.GetBackgrounds,
+		dndapi.GetBackground,
+	))
+
 	// Serve static front-end files (HTML, CSS, JS)
 	// from a directory named 'public'.
 	fileServer := http.FileServer(http.Dir("./public"))

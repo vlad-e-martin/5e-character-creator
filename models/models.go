@@ -96,3 +96,10 @@ type SkillResult struct {
 	URL          string    `json:"url"`
 	UpdatedAt    string    `json:"updated_at"`
 }
+
+// Background Result type
+type BackgroundResult struct {
+	Index                 string      `json:"index"`
+	Name                  string      `json:"name"`
+	StartingProficiencies []ApiResult `json:"starting_proficiencies"`
+}

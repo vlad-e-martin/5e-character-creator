@@ -104,3 +104,22 @@ export function getAllSkills() {
 export function getSkill(index) {
     return fetchFromApi(`/api/skills/${index}`);
 }
+
+// --- Backgrounds ---
+
+/**
+ * Fetches a list of all D&D backgrounds.
+ * @returns {Promise<Array<object>>} A promise that resolves to an array of background objects.
+ */
+export function getAllBackgrounds() {
+    return fetchFromApi("/api/backgrounds/");
+}
+
+/**
+ * Fetches the details for a single background by its index.
+ * @param {string} index - The index of the background (e.g., "acolyte")
+ * @returns {Promise<object>} A promise that resolves to a single background object.
+ */
+export function getBackground(index) {
+    return fetchFromApi(`/api/backgrounds/${index}`);
+}

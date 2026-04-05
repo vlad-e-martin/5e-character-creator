@@ -4,8 +4,8 @@
  * Extends EventTarget to publish changes
  */
 
-import { getRace, getClass, getSubRace } from './dndApi.js';
-import { DndRace, DndClass, DndSubRace } from './dndModels.js';
+import { getRace, getClass, getSubRace, getBackground } from './dndApi.js';
+import { DndRace, DndClass, DndSubRace, DndBackground } from './dndModels.js';
 
 export class DndCharacter extends EventTarget {
     constructor(charName, level, dndRace, dndClass) {
@@ -33,6 +33,7 @@ export class DndCharacter extends EventTarget {
         this._raceDetails = null;
         this._classDetails = null;
         this._subRaceDetails = null;
+        this._backgroundDetails = null;
     }
 
     // --- Getters ---
@@ -50,6 +51,9 @@ export class DndCharacter extends EventTarget {
     get userAbilityBonuses() { return this._userAbilityBonuses; }
     get abilityScores() { return this._abilityScores; }
     get skillProficiencies() { return this._skillProficiencies; }
+
+    get dndBackground() { return this._background; }
+    get backgroundDetails() { return this._backgroundDetails; }
 
     // --- Setters ---
     set charName(newName) {
@@ -174,5 +178,27 @@ export class DndCharacter extends EventTarget {
         if (subRaceObj) applyBonuses(subRaceObj.abilityBonuses);
 
         return totals;
+    }
+
+    /**
+     * Fetches background details by index, maps to model, and updates the character.
+     */
+    async applyBackground(index) {
+        if (!index) {
+            this._backgroundDetails = null;
+            this._background = "";
+            this.dispatchChangeEvent('dndBackground', "");
+            return;
+        }
+        try {
+            const rawData = await getBackground(index);
+            this._backgroundDetails = new DndBackground(rawData);
+            
+            this._background = this._backgroundDetails.name;
+            this.dispatchChangeEvent('dndBackground', this._background);
+            this.dispatchChangeEvent('backgroundDetails', this._backgroundDetails);
+        } catch (error) {
+            console.error(`Failed to fetch and apply background details for ${index}:`, error);
+        }
     }
 }

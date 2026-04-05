@@ -76,7 +76,17 @@ export async function bindSkillsPage(character) {
         }
     }
 
-    // 4. Setup the Choices Remaining tracking
+    // 4. Determine pre-trained skills according to Background
+    const backgroundSkills = new Set();
+    if (character.backgroundDetails && character.backgroundDetails.startingProficiencies) {
+        for (const prof of character.backgroundDetails.startingProficiencies) {
+            if (prof.index && prof.index.startsWith('skill-')) {
+                backgroundSkills.add(prof.index.replace('skill-', ''));
+            }
+        }
+    }
+
+    // 5. Setup the Choices Remaining tracking
     const choicesContainer = document.getElementById('choices-remaining-container');
     const choicesDisplay = document.getElementById('choices-remaining-display');
 
@@ -86,7 +96,8 @@ export async function bindSkillsPage(character) {
         // Count how many skills the user has checked total
         let totalChecked = 0;
         for (const skill of cachedSkills) {
-            if (character.skillProficiencies[skill.index]) {
+            // Count trained skills, except those trained through Background
+            if (character.skillProficiencies[skill.index] && !backgroundSkills.has(skill.index)) {
                 totalChecked++;
             }
         }
@@ -104,10 +115,10 @@ export async function bindSkillsPage(character) {
         }
     };
 
-    // 5. Bind DOM elements and math for each skill
+    // 6. Bind DOM elements and math for each skill
     for (const skill of cachedSkills) {
         const skillId = skill.index; // e.g., "stealth"
-        // The API provides the governing stat! (e.g., "dex")
+        // The API provides the governing stat (e.g., "dex")
         const statKey = skill.abilityScore ? skill.abilityScore.index.toLowerCase() : 'int';
 
         const checkbox = document.getElementById(`skill-${skillId}`);
@@ -116,23 +127,33 @@ export async function bindSkillsPage(character) {
 
         if (!checkbox || !totalDisplay) continue;
 
+        // Visual distinction for Background pre-trained skills
+        const isBackground = backgroundSkills.has(skillId);
         // Visual distinction for recommended skills vs non-recommended skills
         const isAllowed = allowedSkills.size === 0 || allowedSkills.has(skillId);
         
         // Ensure nothing is disabled so homebrew is supported
         checkbox.disabled = false;
 
-        if (isAllowed) {
-            if (label) {
-                label.classList.remove('text-stone-400', 'text-stone-500');
-                label.classList.add('text-stone-900', 'font-medium');
+        if (label) {
+            // Clear all possible text colors first
+            label.classList.remove('text-stone-400', 'text-stone-500', 'text-stone-900', 'text-amber-700', 'font-medium', 'font-bold');
+
+            if (isBackground) {
+                // Background skills get a special amber highlighting
+                label.classList.add('text-amber-700', 'font-bold');
             }
-        } else {
-            if (label) {
-                label.classList.remove('text-stone-900', 'font-medium');
+            if (isAllowed) {
+                label.classList.add('text-stone-900', 'font-medium');
+            } else {
                 // Use a subtle grey for non-class skills
                 label.classList.add('text-stone-500'); 
             }
+        }
+
+        // Auto-check the box if it is a background skill
+        if (isBackground) {
+            character.skillProficiencies[skillId] = true;
         }
 
         // Restore saved checkbox state

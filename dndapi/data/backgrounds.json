@@ -1,0 +1,34 @@
+[
+  {
+    "index": "acolyte",
+    "name": "Acolyte",
+    "starting_proficiencies": [
+      { "index": "skill-insight", "name": "Skill: Insight", "url": "/api/2014/proficiencies/skill-insight" },
+      { "index": "skill-religion", "name": "Skill: Religion", "url": "/api/2014/proficiencies/skill-religion" }
+    ]
+  },
+  {
+    "index": "criminal",
+    "name": "Criminal",
+    "starting_proficiencies": [
+      { "index": "skill-deception", "name": "Skill: Deception", "url": "/api/2014/proficiencies/skill-deception" },
+      { "index": "skill-stealth", "name": "Skill: Stealth", "url": "/api/2014/proficiencies/skill-stealth" }
+    ]
+  },
+  {
+    "index": "folk-hero",
+    "name": "Folk Hero",
+    "starting_proficiencies": [
+      { "index": "skill-animal-handling", "name": "Skill: Animal Handling", "url": "/api/2014/proficiencies/skill-animal-handling" },
+      { "index": "skill-survival", "name": "Skill: Survival", "url": "/api/2014/proficiencies/skill-survival" }
+    ]
+  },
+  {
+    "index": "sage",
+    "name": "Sage",
+    "starting_proficiencies": [
+      { "index": "skill-arcana", "name": "Skill: Arcana", "url": "/api/2014/proficiencies/skill-arcana" },
+      { "index": "skill-history", "name": "Skill: History", "url": "/api/2014/proficiencies/skill-history" }
+    ]
+  }
+]

@@ -122,3 +122,15 @@ export class DndSkill {
         this.updatedAt = data.updated_at || "";
     }
 }
+
+/**
+ * Represent a single D&D Background and its associated starting skill proficiencies
+ */
+export class DndBackground {
+    constructor(data) {
+        if (!data) data = {};
+        this.index = data.index || "";
+        this.name = data.name || "";
+        this.startingProficiencies = data.starting_proficiencies || [];
+    }
+}
