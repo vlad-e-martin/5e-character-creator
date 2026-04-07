@@ -109,26 +109,93 @@ func getDetails[T any](resource string, index string) (T, error) {
 
 // --- RACES ---
 
-func GetRaces() ([]models.RaceResult, error) {
-	var racesNil []models.RaceResult
-
-	races, err := getAllDetails[models.RaceResult]("races")
-	if err != nil {
-		return racesNil, err
+func normalizeRaceBonuses(race *models.RaceResult) {
+	// If it already has options (like from our local JSON), do nothing
+	if len(race.AbilityBonusOptions) > 0 {
+		race.RawAbilityBonuses = nil
+		return
 	}
 
-	return races, nil
+	// If it has raw bonuses from the API, convert them to a single fixed option
+	if len(race.RawAbilityBonuses) > 0 {
+		var unifiedBonuses []models.AbilityBonus
+		for _, rb := range race.RawAbilityBonuses {
+			if rb.AbilityScore != nil {
+				unifiedBonuses = append(unifiedBonuses, models.AbilityBonus{
+					Bonus:         rb.Bonus,
+					AbilityScores: []models.ApiResult{*rb.AbilityScore}, // Convert single stat to array
+				})
+			}
+		}
+
+		race.AbilityBonusOptions = []models.BonusOption{
+			{
+				Desc:    "Standard Racial Bonuses",
+				Bonuses: unifiedBonuses,
+			},
+		}
+		race.RawAbilityBonuses = nil // Clear raw data so it doesn't clutter the JSON response
+	}
+}
+
+func GetRaces() ([]models.RaceResult, error) {
+	// 1. Fetch official races from the API
+	apiRaces, err := getAllDetails[models.RaceResult]("races")
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch API races: %v", err)
+	}
+
+	// 2. Fetch our custom local races
+	customRaces := GetLocalRaces()
+
+	// Create a map of custom races for fast lookup
+	customMap := make(map[string]models.RaceResult)
+	for _, cr := range customRaces {
+		customMap[cr.Index] = cr
+	}
+
+	var combinedRaces []models.RaceResult
+
+	// Add API races, UNLESS overridden by our local JSON
+	for _, ar := range apiRaces {
+		if customOverride, exists := customMap[ar.Index]; exists {
+			combinedRaces = append(combinedRaces, customOverride)
+			delete(customMap, ar.Index) // Remove so we don't add it twice
+		} else {
+			normalizeRaceBonuses(&ar)
+			combinedRaces = append(combinedRaces, ar)
+		}
+	}
+
+	// Add any remaining purely custom races (Aarakocra, Changeling, etc.)
+	for _, cr := range customRaces {
+		if _, alreadyAdded := customMap[cr.Index]; alreadyAdded {
+			combinedRaces = append(combinedRaces, cr)
+		}
+	}
+
+	return combinedRaces, nil
 }
 
 func GetRace(raceIndex string) (models.RaceResult, error) {
-	var raceNil models.RaceResult
+	// 1. Try to fetch from the official API first
+	apiRace, err := getDetails[models.RaceResult]("races", raceIndex)
 
-	race, err := getDetails[models.RaceResult]("races", raceIndex)
-	if err != nil {
-		return raceNil, err
+	// If no error, we're done, return answer.
+	if err == nil {
+		return apiRace, nil
 	}
 
-	return race, nil
+	// 2. If the API failed, check the local data
+	localRace, localErr := GetLocalRace(raceIndex)
+
+	// If no error, we're done, return answer.
+	if localErr == nil {
+		return localRace, nil
+	}
+
+	// 3. If both failed, return a final error
+	return models.RaceResult{}, fmt.Errorf("race '%s' not found in API or local data", raceIndex)
 }
 
 // --- SUB RACES ---

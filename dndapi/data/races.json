@@ -1,0 +1,395 @@
+[
+  {
+    "index": "aarakocra",
+    "name": "Aarakocra",
+    "speed": 25,
+    "ability_bonus_options": [
+        {
+            "desc": "+2 to one ability score and +1 to another",
+            "bonuses": [
+            {
+                "bonus": 2,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }, 
+        {
+            "desc": "+1 to 3 different ability scores",
+            "bonuses": [
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }
+    ],
+    "alignment": "Most Aarakocra are good and rarely choose sides when it comes to law and chaos.",
+    "age": "Aarakocra reach maturity by age 3. They don't usually live longer than 30 years.",
+    "size": "Medium",
+    "size_description": "Aarakocra are about 5 feet tall. They have thin, lightweight bodies that weigh between 80 and 100 pounds. Your size is Medium.",
+    "languages": [
+      { "index": "common", "name": "Common", "url": "/api/2014/languages/common" }
+    ],
+    "language_desc": "You can speak, read, and write Common, Aarakocra, and Auran.",
+    "traits": [
+        { "index": "flight", "name": "Flight" },
+        { "index": "talons", "name": "Talons" },
+        { "index": "wind-caller", "name": "Wind Caller" }
+    ],
+    "subraces": []
+  },
+  {
+    "index": "aasimar",
+    "name": "Aasimar",
+    "speed": 30,
+    "ability_bonus_options": [
+        {
+            "desc": "+2 to one ability score and +1 to another",
+            "bonuses": [
+            {
+                "bonus": 2,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }, 
+        {
+            "desc": "+1 to 3 different ability scores",
+            "bonuses": [
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }
+    ],
+    "alignment": "Imbued with celestial power, most aasimar are good. Aasimar heritages often push them toward lawful good, dedicating their lives to combating evil, protecting the innocent, and serving the divine forces of justice.",
+    "age": "Aasimar mature at the same rate as humans, but they can live up to 160 years.",
+    "size": "Medium",
+    "size_description": "Aasimar have the same range of height and weight as humans, though they often possess a subtly otherworldly presence. Your size is Medium.",
+    "languages": [
+      { "index": "common", "name": "Common", "url": "/api/2014/languages/common" },
+      { "index": "celestial", "name": "Celestial", "url": "/api/2014/languages/celestial" }
+    ],
+    "language_desc": "Common and Celestial",
+    "traits": [
+      { "index": "celestial-resistance", "name": "Celestial Resistance" },
+      { "index": "darkvision", "name": "Darkvision", "url": "/api/2014/traits/darkvision" },
+      { "index": "healing-hands", "name": "Healing Hands" },
+      { "index": "light-bearer", "name": "Light Bearer" },
+      { "index": "celestial-revelation", "name": "Celestial Revelation" }
+    ],
+    "subraces": []
+  },
+  {
+    "index": "bugbear",
+    "name": "Bugbear",
+    "speed": 30,
+    "ability_bonus_options": [
+        {
+            "desc": "+2 to one ability score and +1 to another",
+            "bonuses": [
+            {
+                "bonus": 2,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }, 
+        {
+            "desc": "+1 to 3 different ability scores",
+            "bonuses": [
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }
+    ],
+    "alignment": "Bugbears endure a harsh existence that demands them to be selfish and cruel. Most bugbears are chaotic evil, though a bugbear who separates from their tribe and ventures into the world might lean toward a neutral alignment.",
+    "age": "Bugbears reach adulthood at age 16 and live up to 80 years.",
+    "size": "Medium",
+    "size_description": "Bugbears are massive and bulky, standing between 6 and 8 feet tall and weighing between 250 and 300 pounds. Your size is Medium.",
+    "languages": [
+      { "index": "common", "name": "Common", "url": "/api/2014/languages/common" }
+    ],
+    "language_desc": "Common and 1 other",
+    "traits": [
+      { "index": "darkvision", "name": "Darkvision", "url": "/api/2014/traits/darkvision" },
+      { "index": "fey-ancestry", "name": "Fey Ancestry", "url": "/api/2014/traits/fey-ancestry" },
+      { "index": "long-limbed", "name": "Long-Limbed" },
+      { "index": "powerful-build", "name": "Powerful Build" },
+      { "index": "sneaky", "name": "Sneaky" },
+      { "index": "surprise-attack", "name": "Surprise Attack" }
+    ],
+    "subraces": []
+  },
+  {
+    "index": "changeling",
+    "name": "Changeling",
+    "speed": 30,
+    "ability_bonus_options": [
+        {
+            "desc": "+2 to one ability score and +1 to another",
+            "bonuses": [
+            {
+                "bonus": 2,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }, 
+        {
+            "desc": "+1 to 3 different ability scores",
+            "bonuses": [
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            },
+            {
+                "bonus": 1,
+                "ability_scores": [
+                { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+                { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+                { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+                { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+                { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+                { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+                ]
+            }
+            ]
+        }
+    ],
+    "alignment": "Changelings tend toward pragmatic neutrality, as their survival often depends on adapting to their surroundings rather than clinging to strict moral codes. Few are purely evil, but many lean toward chaos due to their shifting nature.",
+    "age": "Changelings mature slightly faster than humans but share a similar lifespan—typically a century or less.",
+    "size": "Medium",
+    "size_description": "In their natural forms, changelings average between 5 and 6 feet in height, with slender builds and pale, featureless traits. Your size is Medium.",
+    "languages": [
+      { "index": "common", "name": "Common", "url": "/api/2014/languages/common" }
+    ],
+    "language_desc": "Common and 1 other",
+    "traits": [
+      { "index": "changeling-instincts", "name": "Changeling Instincts" },
+      { "index": "shapechanger", "name": "Shapechanger" }
+    ],
+    "subraces": []
+  },
+  {
+    "index": "human",
+    "name": "Human",
+    "speed": 30,
+    "ability_bonus_options": [
+      {
+        "desc": "+1 to two different ability scores",
+        "bonuses": [
+          {
+            "bonus": 1,
+            "ability_scores": [
+              { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+              { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+              { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+              { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+              { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+              { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+            ]
+          },
+          {
+            "bonus": 1,
+            "ability_scores": [
+              { "index": "cha", "name": "CHA", "url": "/api/2014/ability-scores/cha" },
+              { "index": "con", "name": "CON", "url": "/api/2014/ability-scores/con" },
+              { "index": "dex", "name": "DEX", "url": "/api/2014/ability-scores/dex" },
+              { "index": "int", "name": "INT", "url": "/api/2014/ability-scores/int" },
+              { "index": "str", "name": "STR", "url": "/api/2014/ability-scores/str" },
+              { "index": "wis", "name": "WIS", "url": "/api/2014/ability-scores/wis" }
+            ]
+          }
+        ]
+      }
+    ],
+    "alignment": "Humans tend toward no particular alignment. The best and the worst are found among them.",
+    "age": "Humans reach adulthood in their late teens and live less than a century.",
+    "size": "Medium",
+    "size_description": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
+    "languages": [
+      { "index": "common", "name": "Common", "url": "/api/2014/languages/common" }
+    ],
+    "language_desc": "You can speak, read, and write Common and one extra language of your choice.",
+    "traits": [],
+    "subraces": []
+  }
+]

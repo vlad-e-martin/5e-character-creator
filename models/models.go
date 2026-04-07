@@ -4,7 +4,7 @@ package models
 type ApiResult struct {
 	Index string `json:"index"`
 	Name  string `json:"name"`
-	URL   string `json:"url"`
+	URL   string `json:"url,omitempty"` // Not relevant in custom format
 }
 
 // The standard shape of a list of results from /api/2014/:endpoint
@@ -16,8 +16,9 @@ type ApiResultList struct {
 // --- SPECIALIZED PROPERTY TYPES ---
 
 type AbilityBonus struct {
-	AbilityScore ApiResult `json:"ability_score"`
-	Bonus        int       `json:"bonus"`
+	Bonus         int         `json:"bonus"`
+	AbilityScore  *ApiResult  `json:"ability_score,omitempty"`  // Rigid API format
+	AbilityScores []ApiResult `json:"ability_scores,omitempty"` // Flexible custom format
 }
 
 // --- PROFICIENCY CHOICES TYPES ---
@@ -39,6 +40,11 @@ type ProficiencyChoice struct {
 	From   ProficiencyOptionSet `json:"from"`
 }
 
+type BonusOption struct {
+	Desc    string         `json:"desc"`
+	Bonuses []AbilityBonus `json:"bonuses"`
+}
+
 // --- TOP-LEVEL RESULT TYPES ---
 
 type ClassResult struct {
@@ -48,43 +54,45 @@ type ClassResult struct {
 	SavingThrows       []ApiResult         `json:"saving_throws"`
 	SubClasses         []ApiResult         `json:"subclasses"`
 	ProficiencyChoices []ProficiencyChoice `json:"proficiency_choices"`
-	URL                string              `json:"url"`
-	UpdatedAt          string              `json:"updated_at"`
+	URL                string              `json:"url,omitempty"`        // Not relevant in custom format
+	UpdatedAt          string              `json:"updated_at,omitempty"` // Not relevant in custom format
 }
 
 type RaceResult struct {
-	Index          string         `json:"index"`
-	Name           string         `json:"name"`
-	Speed          int            `json:"speed"`
-	AbilityBonuses []AbilityBonus `json:"ability_bonuses"`
-	AlignmentDesc  string         `json:"alignment"`
-	AgeDesc        string         `json:"age"`
-	Size           string         `json:"size"`
-	SizeDesc       string         `json:"size_description"`
-	Languages      []ApiResult    `json:"languages"`
-	LanguageDesc   string         `json:"language_desc"`
-	Traits         []ApiResult    `json:"traits"`
-	SubRaces       []ApiResult    `json:"subraces"`
-	URL            string         `json:"url"`
-	UpdatedAt      string         `json:"updated_at"`
+	Index               string         `json:"index"`
+	Name                string         `json:"name"`
+	Speed               int            `json:"speed"`
+	RawAbilityBonuses   []AbilityBonus `json:"ability_bonuses,omitempty"` // Captured from API
+	AbilityBonusOptions []BonusOption  `json:"ability_bonus_options"`     // Custom unified format
+	AlignmentDesc       string         `json:"alignment"`
+	AgeDesc             string         `json:"age"`
+	Size                string         `json:"size"`
+	SizeDesc            string         `json:"size_description"`
+	Languages           []ApiResult    `json:"languages"`
+	LanguageDesc        string         `json:"language_desc"`
+	Traits              []ApiResult    `json:"traits"`
+	SubRaces            []ApiResult    `json:"subraces"`
+	URL                 string         `json:"url,omitempty"`        // Not relevant in custom format
+	UpdatedAt           string         `json:"updated_at,omitempty"` // Not relevant in custom format
 }
 
 type ParentRaceResult struct {
 	Index     string `json:"index"`
 	Name      string `json:"name"`
-	URL       string `json:"url"`
-	UpdatedAt string `json:"updated_at"`
+	URL       string `json:"url,omitempty"`        // Not relevant in custom format
+	UpdatedAt string `json:"updated_at,omitempty"` // Not relevant in custom format
 }
 
 type SubRaceResult struct {
-	Index          string           `json:"index"`
-	Name           string           `json:"name"`
-	Race           ParentRaceResult `json:"race"`
-	Desc           string           `json:"desc"`
-	AbilityBonuses []AbilityBonus   `json:"ability_bonuses"`
-	RacialTraits   []ApiResult      `json:"racial_traits"`
-	URL            string           `json:"url"`
-	UpdatedAt      string           `json:"updated_at"`
+	Index               string           `json:"index"`
+	Name                string           `json:"name"`
+	Race                ParentRaceResult `json:"race"`
+	Desc                string           `json:"desc"`
+	RawAbilityBonuses   []AbilityBonus   `json:"ability_bonuses,omitempty"` // Captured from API
+	AbilityBonusOptions []BonusOption    `json:"ability_bonus_options"`     // Custom unified format
+	RacialTraits        []ApiResult      `json:"racial_traits"`
+	URL                 string           `json:"url,omitempty"`        // Not relevant in custom format
+	UpdatedAt           string           `json:"updated_at,omitempty"` // Not relevant in custom format
 }
 
 // Skill Result Type
@@ -93,8 +101,8 @@ type SkillResult struct {
 	Name         string    `json:"name"`
 	Desc         []string  `json:"desc"`
 	AbilityScore ApiResult `json:"ability_score"`
-	URL          string    `json:"url"`
-	UpdatedAt    string    `json:"updated_at"`
+	URL          string    `json:"url,omitempty"`        // Not relevant in custom format
+	UpdatedAt    string    `json:"updated_at,omitempty"` // Not relevant in custom format
 }
 
 // Background Result type

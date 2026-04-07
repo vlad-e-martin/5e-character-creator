@@ -8,11 +8,27 @@
     ]
   },
   {
+    "index": "charlatan",
+    "name": "Charlatan",
+    "starting_proficiencies": [
+      { "index": "skill-deception", "name": "Skill: Deception", "url": "/api/2014/proficiencies/skill-deception" },
+      { "index": "skill-sleight-of-hand", "name": "Skill: Sleight of Hand", "url": "/api/2014/proficiencies/skill-sleight-of-hand" }
+    ]
+  },
+  {
     "index": "criminal",
     "name": "Criminal",
     "starting_proficiencies": [
       { "index": "skill-deception", "name": "Skill: Deception", "url": "/api/2014/proficiencies/skill-deception" },
       { "index": "skill-stealth", "name": "Skill: Stealth", "url": "/api/2014/proficiencies/skill-stealth" }
+    ]
+  },
+  {
+    "index": "entertainer",
+    "name": "Entertainer",
+    "starting_proficiencies": [
+      { "index": "skill-acrobatics", "name": "Skill: Acrobatics", "url": "/api/2014/proficiencies/skill-acrobatics" },
+      { "index": "skill-performance", "name": "Skill: Performance", "url": "/api/2014/proficiencies/skill-performance" }
     ]
   },
   {
@@ -24,11 +40,91 @@
     ]
   },
   {
+    "index": "gladiator",
+    "name": "Gladiator",
+    "starting_proficiencies": [
+      { "index": "skill-acrobatics", "name": "Skill: Acrobatics", "url": "/api/2014/proficiencies/skill-acrobatics" },
+      { "index": "skill-performance", "name": "Skill: Performance", "url": "/api/2014/proficiencies/skill-performance" }
+    ]
+  },
+  {
+    "index": "guild-artisan",
+    "name": "Guild Artisan",
+    "starting_proficiencies": [
+      { "index": "skill-insight", "name": "Skill: Insight", "url": "/api/2014/proficiencies/skill-insight" },
+      { "index": "skill-persuasion", "name": "Skill: Persuasion", "url": "/api/2014/proficiencies/skill-persuasion" }
+    ]
+  },
+  {
+    "index": "hermit",
+    "name": "Hermit",
+    "starting_proficiencies": [
+      { "index": "skill-medicine", "name": "Skill: Medicine", "url": "/api/2014/proficiencies/skill-medicine" },
+      { "index": "skill-religion", "name": "Skill: Religion", "url": "/api/2014/proficiencies/skill-religion" }
+    ]
+  },
+  {
+    "index": "knight",
+    "name": "Knight",
+    "starting_proficiencies": [
+      { "index": "skill-history", "name": "Skill: History", "url": "/api/2014/proficiencies/skill-history" },
+      { "index": "skill-persuasion", "name": "Skill: Persuasion", "url": "/api/2014/proficiencies/skill-persuasion" }
+    ]
+  },
+  {
+    "index": "noble",
+    "name": "Noble",
+    "starting_proficiencies": [
+      { "index": "skill-history", "name": "Skill: History", "url": "/api/2014/proficiencies/skill-history" },
+      { "index": "skill-persuasion", "name": "Skill: Persuasion", "url": "/api/2014/proficiencies/skill-persuasion" }
+    ]
+  },
+  {
+    "index": "outlander",
+    "name": "Outlander",
+    "starting_proficiencies": [
+      { "index": "skill-athletics", "name": "Skill: Athletics", "url": "/api/2014/proficiencies/skill-athletics" },
+      { "index": "skill-survival", "name": "Skill: Survival", "url": "/api/2014/proficiencies/skill-survival" }
+    ]
+  },
+  {
+    "index": "pirate",
+    "name": "Pirate",
+    "starting_proficiencies": [
+      { "index": "skill-athletics", "name": "Skill: Athletics", "url": "/api/2014/proficiencies/skill-athletics" },
+      { "index": "skill-perception", "name": "Skill: Perception", "url": "/api/2014/proficiencies/skill-perception" }
+    ]
+  },
+  {
     "index": "sage",
     "name": "Sage",
     "starting_proficiencies": [
       { "index": "skill-arcana", "name": "Skill: Arcana", "url": "/api/2014/proficiencies/skill-arcana" },
       { "index": "skill-history", "name": "Skill: History", "url": "/api/2014/proficiencies/skill-history" }
+    ]
+  },
+  {
+    "index": "sailor",
+    "name": "Sailor",
+    "starting_proficiencies": [
+      { "index": "skill-athletics", "name": "Skill: Athletics", "url": "/api/2014/proficiencies/skill-athletics" },
+      { "index": "skill-perception", "name": "Skill: Perception", "url": "/api/2014/proficiencies/skill-perception" }
+    ]
+  },
+  {
+    "index": "soldier",
+    "name": "Soldier",
+    "starting_proficiencies": [
+      { "index": "skill-athletics", "name": "Skill: Athletics", "url": "/api/2014/proficiencies/skill-athletics" },
+      { "index": "skill-intimidation", "name": "Skill: Intimidation", "url": "/api/2014/proficiencies/skill-intimidation" }
+    ]
+  },
+  {
+    "index": "urchin",
+    "name": "Urchin",
+    "starting_proficiencies": [
+      { "index": "skill-sleight-of-hand", "name": "Skill: Sleight of Hand", "url": "/api/2014/proficiencies/skill-sleight-of-hand" },
+      { "index": "skill-stealth", "name": "Skill: Stealth", "url": "/api/2014/proficiencies/skill-stealth" }
     ]
   }
 ]
